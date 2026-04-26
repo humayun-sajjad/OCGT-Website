@@ -9,7 +9,6 @@
   "theme_color": "#101113",
   "lang": "de-DE",
   "icons": [
-    { "src": "Images/LOGO_black.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "Images/LOGO_black.png", "sizes": "192x192", "type": "image/png", "purpose": "any" }
+    { "src": "Images/LOGO_black.png", "type": "image/png", "purpose": "any", "sizes": "any" }
   ]
 }

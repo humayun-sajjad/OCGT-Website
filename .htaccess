@@ -2,10 +2,28 @@
 # OCGT — Security Headers, Compression & Caching
 # ═══════════════════════════════════════════════
 
+# Serve the SPA directly at the root URL (skip the legacy index.html meta-refresh)
+DirectoryIndex OCGT_website.html index.html
+
 # Force HTTPS
 RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ─────────────────────────────────────────────────────────────
+# SPA path-based routing — internal rewrite of every clean URL
+# (e.g. /geotechnik, /3d-vermessung) to OCGT_website.html so
+# Google indexes each path as a distinct, crawlable URL.
+# Does NOT rewrite real files (.css, .js, images, sitemap, etc.).
+# ─────────────────────────────────────────────────────────────
+RewriteCond %{REQUEST_URI} !^/OCGT_website\.html$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.(css|js|jpg|jpeg|png|gif|webp|svg|mp4|webm|woff2?|ttf|eot|ico|xml|txt|webmanifest|json|map)$
+RewriteRule ^(.*)$ /OCGT_website.html [L]
+
+# Redirect bare root and /index.html to clean root URL
+RewriteRule ^index\.html$ / [R=301,L]
 
 # Security Headers
 <IfModule mod_headers.c>
