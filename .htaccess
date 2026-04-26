@@ -92,8 +92,10 @@ Options -Indexes
   </IfModule>
 </FilesMatch>
 
-# Explicit allowlist: public web-delivered videos
-<FilesMatch "^(Hero-web-compact\.(mp4|webm)|Hero-web\.(mp4|webm))$">
+# Explicit allowlist: public web-delivered videos.
+# Anything served by the site itself (hero loop, marketing clips) MUST be listed
+# here, otherwise the global mp4/mov deny block above will return 403.
+<FilesMatch "^(Hero_final-(1080|720)\.(mp4|webm)|Hero_final-poster\.jpg|Hero_glitch-(1080|720)\.(mp4|webm)|Hero_glitch-poster\.jpg|Hero-web(-compact)?\.(mp4|webm)|Website_hero-(1080|720)\.(mp4|webm)|signal-2021-12-25-17-04-33-257\.mp4)$">
   <IfModule mod_authz_core.c>
     Require all granted
   </IfModule>
