@@ -1353,7 +1353,7 @@ html.lang-de .en-only { display:none !important; }
   -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 60%, black 20%, transparent 80%);
   opacity:.6;
 }
-/* Scanline sweep (vertical, slow) */
+/* Scanline sweep — full to-and-fro: bottom → top → bottom in one cycle */
 .hero-x-scanline {
   position:absolute; left:0; right:0; top:-20%;
   height:140%;
@@ -1363,14 +1363,16 @@ html.lang-de .en-only { display:none !important; }
     rgba(63,180,195,.14) 50%,
     rgba(93,239,149,.06) 50.5%,
     transparent 52%);
-  animation:hxScan 11s ease-in-out infinite;
+  animation:hxScan 16s ease-in-out infinite;
   pointer-events:none;
 }
 @keyframes hxScan {
-  0%   { transform:translateY(60%); opacity:0; }
-  15%  { opacity:.8; }
-  85%  { opacity:.8; }
-  100% { transform:translateY(-40%); opacity:0; }
+  0%   { transform:translateY(60%);  opacity:0; }
+  8%   { opacity:.8; }
+  45%  { transform:translateY(-40%); opacity:.8; }
+  55%  { transform:translateY(-40%); opacity:.8; }
+  92%  { transform:translateY(60%);  opacity:.8; }
+  100% { transform:translateY(60%);  opacity:0; }
 }
 /* Drift particles (CSS-only) */
 .hero-x-particles {
